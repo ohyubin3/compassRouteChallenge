@@ -1,33 +1,43 @@
 const { Schema, model } = require("mongoose");
-const assignmentSchema = require("./Reaction");
+const userSchema = require("./User");
+const thoughtSchema = require("./Thought");
 
 // Schema to create Student model
-const studentSchema = new Schema(
+const userSchema = new Schema(
   {
-    first: {
+    username: {
       type: String,
+      trim: true,
       required: true,
+      unique: true,
       max_length: 50,
     },
-    last: {
+    email: {
       type: String,
       required: true,
-      max_length: 50,
+      match: /.+\@.+\..+/,
+      unique: true,
     },
-    github: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    assignments: [assignmentSchema],
+    thoughts: [thoughtSchema],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+      },
+    ],
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
   }
 );
 
-const Student = model("student", studentSchema);
+userSchema.virtual("friendCount").get(function () {
+  return this.friends.length;
+});
 
-module.exports = Student;
+const User = model("user", userSchema);
+
+module.exports = Users;
