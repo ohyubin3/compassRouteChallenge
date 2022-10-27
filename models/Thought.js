@@ -1,8 +1,7 @@
 const { Schema, model } = require("mongoose");
-const reactionSchema = require("./Reaction");
 
-// Schema to create a course model
-const reactionSchema = new Schema(
+// Schema to create a c model
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -19,7 +18,7 @@ const reactionSchema = new Schema(
       type: String,
       required: true,
     },
-    students: [reactionSchema],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
