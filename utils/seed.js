@@ -13,24 +13,26 @@ connection.once("open", async () => {
   // Drop existing users
   await User.deleteMany({});
 
+  // Drop existing reaction
+  await Reaction.deleteMany({});
+
   // Create empty array to hold the users
   const users = [];
 
-  // Loop 20 times -- add users to the users array
-  for (let i = 0; i < 20; i++) {
-    // Get some random reaction objects using a helper function that we imported from ./data
-    const reactions = getRandomReactions(20);
+  // attach random reaction to existing thought
+  const reactions = getRandomReactions(2);
 
-    const fullName = getRandomName();
-    const first = fullName.split(" ")[0];
-    const last = fullName.split(" ")[1];
-    const github = `${first}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
+  // Loop 3 times -- add users to the users array
+  for (let i = 0; i < 3; i++) {
+    // Get some random reaction objects using a helper function that we imported from ./data
+
+    const username = getRandomName();
 
     users.push({
-      first,
-      last,
-      github,
-      reactions,
+      username,
+      email,
+      thoughts,
+      friends,
     });
   }
 
@@ -39,9 +41,10 @@ connection.once("open", async () => {
 
   // Add thoughts to the collection and await the results
   await Thought.collection.insertOne({
-    thoughtName: "UCLA",
-    inPerson: false,
-    users: users.map((user) => user._id),
+    thoughtText: "This is a test thought",
+    createdAt: 10 - 25 - 2022,
+    username: users.map((user) => user._id),
+    reactions,
   });
 
   // Log out the seed data to indicate what should appear in the database

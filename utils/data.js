@@ -76,42 +76,33 @@ const names = [
   "Parker",
 ];
 
-const appDescriptions = [
-  "Decision Tracker",
-  "Find My Phone",
-  "Learn Piano",
-  "Starbase Defender",
-  "Tower Defense",
-  "Monopoly Money Manager",
-  "Movie trailers",
-  "Hello world",
-  "Stupid Social Media App",
-  "Notes",
-  "Messages",
-  "Email",
-  "Compass",
-  "Firefox",
-  "Running app",
-  "Cooking app",
-  "Poker",
-  "Deliveries",
+const randomReactions = [
+  "That is a cool thought",
+  "I agree",
+  "I disagree",
+  "You do not know what you are talking about",
+  "I really do not care",
+  "Hold on to that thought",
+  "Good thinking",
+  "I like it a lot",
 ];
 
 // Get a random item given an array
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// Gets a random full name
-const getRandomName = () =>
-  `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
+// Gets a random username
+const getRandomName = () => `${getRandomArrItem(names)}`;
 
-// Function to generate random reactions that we can add to user object.
+// Function to generate random reactions that we can add to thought object.
+
 const getRandomReactions = (int) => {
   const results = [];
   for (let i = 0; i < int; i++) {
     results.push({
-      reactionName: getRandomArrItem(appDescriptions),
-      score: Math.floor(Math.random() * (99 - 70 + 1) + 70),
       reactionId: new Types.ObjectId(),
+      reactionBody: getRandomArrItem(randomReactions),
+      username: getRandomArrItem(names),
+      createdAt: 10 - 25 - 2022,
     });
   }
   return results;
