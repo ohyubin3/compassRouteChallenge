@@ -54,6 +54,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+  // Add reaction to a thought
   addReaction(req, res) {
     console.log("You are adding an reaction");
     console.log(req.body);
@@ -71,7 +72,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Remove reaction from a user
+  // Remove reaction from a thought
   removeReaction(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.thoughtId },

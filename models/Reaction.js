@@ -30,8 +30,8 @@ const reactionSchema = new Schema(
   }
 );
 
-reactionSchema.virtual("createdAt").get(function () {
-  return this.friends.length;
-});
+// reactionSchema.virtual("createdAt").get(function () {
+//   return this.friends.length;
+// });
 
 module.exports = reactionSchema;
