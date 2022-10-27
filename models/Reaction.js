@@ -1,4 +1,5 @@
 const { Schema, Types } = require("mongoose");
+// Moments
 
 const reactionSchema = new Schema(
   {
@@ -19,7 +20,6 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      time,
     },
   },
   {
@@ -29,5 +29,9 @@ const reactionSchema = new Schema(
     id: false,
   }
 );
+
+reactionSchema.virtual("createdAt").get(function () {
+  return this.friends.length;
+});
 
 module.exports = reactionSchema;
