@@ -17,7 +17,7 @@ const friendSeedData = ["Aaran", "Aaren"];
 // Gets a random username
 const seedUsername = (int) => {
   const results = [];
-  for (let i = 0; i < int.length; i++) {
+  for (let i = 0; i < int; i++) {
     results.push({
       username: usernameSeedData[i],
     });
@@ -27,7 +27,7 @@ const seedUsername = (int) => {
 
 const seedEmail = (int) => {
   const results = [];
-  for (let i = 0; i < int.length; i++) {
+  for (let i = 0; i < int; i++) {
     results.push({
       email: emailSeedData[i],
     });
@@ -37,7 +37,7 @@ const seedEmail = (int) => {
 
 const seedThoughtText = (int) => {
   const results = [];
-  for (let i = 0; i < int.length; i++) {
+  for (let i = 0; i < int; i++) {
     results.push({
       thoughtText: thoughtSeedData[i],
       createdAt: Date.now(),
@@ -49,7 +49,7 @@ const seedThoughtText = (int) => {
 
 const seedCreatedDate = (int) => {
   const results = [];
-  for (let i = 0; i < int.length; i++) {
+  for (let i = 0; i < int; i++) {
     results.push({
       createdAt: dateSeedDate[i],
     });
@@ -61,7 +61,7 @@ const seedCreatedDate = (int) => {
 
 const seedReactions = (int) => {
   const results = [];
-  for (let i = 1; i < int.length; i++) {
+  for (let i = 1; i < int; i++) {
     results.push({
       reactionId: new Types.ObjectId(),
       reactionBody: reactionSeedData[i],
@@ -73,7 +73,7 @@ const seedReactions = (int) => {
 
 const seedFriend = (int) => {
   const results = [];
-  for (let i = 2; i < int.length; i++) {
+  for (let i = 2; i < int; i++) {
     results.push({
       friends: User.Types.ObjectId(),
     });

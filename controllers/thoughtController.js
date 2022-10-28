@@ -1,10 +1,10 @@
-const { Thought, User } = require("../models");
+const { User } = require("../models/");
+const { Thought } = require("../models/");
 
 module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
     Thought.find()
-      .populate("users")
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
@@ -23,7 +23,6 @@ module.exports = {
   // Create a thought
   createThought(req, res) {
     Thought.create(req.body)
-      .populate("username")
       .then((thought) => res.json(thought))
       .catch((err) => {
         console.log(err);

@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const reactionSchema = require("./Reaction");
+const moment = require("moment");
 
 // Schema to create a c model
 const thoughtSchema = new Schema(
@@ -12,7 +13,7 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now(),
+      default: moment().format("MM-DD-YYYY HH:MM:SS"),
     },
     username: {
       type: String,
