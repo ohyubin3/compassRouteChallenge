@@ -23,6 +23,7 @@ module.exports = {
   // Create a thought
   createThought(req, res) {
     Thought.create(req.body)
+      .populate("username")
       .then((thought) => res.json(thought))
       .catch((err) => {
         console.log(err);

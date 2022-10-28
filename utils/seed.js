@@ -1,6 +1,13 @@
 const connection = require("../config/connection");
 const { Thought, User } = require("../models");
-const { getRandomName, getRandomReactions } = require("./data");
+const {
+  seedUsername,
+  seedThoughtText,
+  seedEmail,
+  seedReactions,
+  seedFriend,
+  seedCreatedDate,
+} = require("./data");
 
 connection.on("error", (err) => err);
 
@@ -13,20 +20,22 @@ connection.once("open", async () => {
   // Drop existing users
   await User.deleteMany({});
 
-  // Drop existing reaction
-  await Reaction.deleteMany({});
-
   // Create empty array to hold the users
   const users = [];
+  const thoughts = [];
 
   // attach random reaction to existing thought
-  const reactions = getRandomReactions(2);
 
-  // Loop 3 times -- add users to the users array
-  for (let i = 0; i < 3; i++) {
+  // Loop 2 times -- add users to the users array
+  for (let i = 0; i < 2; i++) {
     // Get some random reaction objects using a helper function that we imported from ./data
 
-    const username = getRandomName();
+    const username = seedUsername();
+    const email = seedEmail();
+    const thoughtText = seedThoughtText();
+    const friends = seedFriend();
+    const reactions = seedReactions();
+    const createdAt = seedCreatedDate();
 
     users.push({
       username,
@@ -34,21 +43,24 @@ connection.once("open", async () => {
       thoughts,
       friends,
     });
+
+    thoughts.push({
+      thoughtText,
+      createdAt,
+      username,
+      reactions,
+    });
   }
 
   // Add users to the collection and await the results
   await User.collection.insertMany(users);
 
   // Add thoughts to the collection and await the results
-  await Thought.collection.insertOne({
-    thoughtText: "This is a test thought",
-    createdAt: 10 - 25 - 2022,
-    username: users.map((user) => user._id),
-    reactions,
-  });
+  await Thought.collection.insertMany(thoughts);
 
   // Log out the seed data to indicate what should appear in the database
   console.table(users);
+  console.table(thoughts);
   console.info("Seeding complete! 🌱");
   process.exit(0);
 });

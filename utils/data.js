@@ -1,112 +1,92 @@
 const { Types } = require("mongoose");
+const { User } = require("../models");
 
-const names = [
-  "Aaran",
-  "Aaren",
-  "Aarez",
-  "Aarman",
-  "Aaron",
-  "Aaron-James",
-  "Aarron",
-  "Aaryan",
-  "Aaryn",
-  "Aayan",
-  "Aazaan",
-  "Abaan",
-  "Abbas",
-  "Abdallah",
-  "Abdalroof",
-  "Abdihakim",
-  "Abdirahman",
-  "Abdisalam",
-  "Abdul",
-  "Abdul-Aziz",
-  "Abdulbasir",
-  "Abdulkadir",
-  "Abdulkarem",
-  "Smith",
-  "Jones",
-  "Coollastname",
-  "enter_name_here",
-  "Ze",
-  "Zechariah",
-  "Zeek",
-  "Zeeshan",
-  "Zeid",
-  "Zein",
-  "Zen",
-  "Zendel",
-  "Zenith",
-  "Zennon",
-  "Zeph",
-  "Zerah",
-  "Zhen",
-  "Zhi",
-  "Zhong",
-  "Zhuo",
-  "Zi",
-  "Zidane",
-  "Zijie",
-  "Zinedine",
-  "Zion",
-  "Zishan",
-  "Ziya",
-  "Ziyaan",
-  "Zohaib",
-  "Zohair",
-  "Zoubaeir",
-  "Zubair",
-  "Zubayr",
-  "Zuriel",
-  "Xander",
-  "Jared",
-  "Courtney",
-  "Gillian",
-  "Clark",
-  "Jared",
-  "Grace",
-  "Kelsey",
-  "Tamar",
-  "Alex",
-  "Mark",
-  "Tamar",
-  "Farish",
-  "Sarah",
-  "Nathaniel",
-  "Parker",
+const usernameSeedData = ["Aaran", "Aaren"];
+
+const reactionSeedData = ["That is a cool thought", "I agree"];
+
+const emailSeedData = ["RandomEmail1@naver.com", "coolEmail@gmail.com"];
+
+const thoughtSeedData = [
+  "This is just random thought guys",
+  "This is just random thought ladies",
 ];
 
-const randomReactions = [
-  "That is a cool thought",
-  "I agree",
-  "I disagree",
-  "You do not know what you are talking about",
-  "I really do not care",
-  "Hold on to that thought",
-  "Good thinking",
-  "I like it a lot",
-];
-
-// Get a random item given an array
-const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const friendSeedData = ["Aaran", "Aaren"];
 
 // Gets a random username
-const getRandomName = () => `${getRandomArrItem(names)}`;
+const seedUsername = (int) => {
+  const results = [];
+  for (let i = 0; i < int.length; i++) {
+    results.push({
+      username: usernameSeedData[i],
+    });
+  }
+  return results;
+};
+
+const seedEmail = (int) => {
+  const results = [];
+  for (let i = 0; i < int.length; i++) {
+    results.push({
+      email: emailSeedData[i],
+    });
+  }
+  return results;
+};
+
+const seedThoughtText = (int) => {
+  const results = [];
+  for (let i = 0; i < int.length; i++) {
+    results.push({
+      thoughtText: thoughtSeedData[i],
+      createdAt: Date.now(),
+      username: usernameSeedData[i],
+    });
+  }
+  return results;
+};
+
+const seedCreatedDate = (int) => {
+  const results = [];
+  for (let i = 0; i < int.length; i++) {
+    results.push({
+      createdAt: dateSeedDate[i],
+    });
+  }
+  return results;
+};
 
 // Function to generate random reactions that we can add to thought object.
 
-const getRandomReactions = (int) => {
+const seedReactions = (int) => {
   const results = [];
-  for (let i = 0; i < int; i++) {
+  for (let i = 1; i < int.length; i++) {
     results.push({
       reactionId: new Types.ObjectId(),
-      reactionBody: getRandomArrItem(randomReactions),
-      username: getRandomArrItem(names),
-      createdAt: 10 - 25 - 2022,
+      reactionBody: reactionSeedData[i],
+      username: usernameSeedData[i],
+    });
+  }
+  return results;
+};
+
+const seedFriend = (int) => {
+  const results = [];
+  for (let i = 2; i < int.length; i++) {
+    results.push({
+      friends: User.Types.ObjectId(),
     });
   }
   return results;
 };
 
 // Export the functions for use in seed.js
-module.exports = { getRandomName, getRandomReactions };
+module.exports = {
+  seedUsername,
+  seedThoughtText,
+  seedEmail,
+  seedReactions,
+  seedFriend,
+  seedCreatedDate,
+};
