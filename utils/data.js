@@ -14,7 +14,6 @@ const thoughtSeedData = [
 
 const friendSeedData = ["Aaran", "Aaren"];
 
-// Gets a random username
 const seedUsername = (int) => {
   const results = [];
   for (let i = 0; i < int; i++) {
