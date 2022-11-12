@@ -41,7 +41,7 @@ Please refer to <a href="https://drive.google.com/file/d/19qkTrU_6pediUAAFjW_T53
 
 Your Name - Paul Oh, baul3oh@gmail.com
 
-Project Link: https://github.com/ohyubin3/compassRouteChallenge
+Project Link: https://github.com/ohyubin3/mongoDBRouteTest
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
