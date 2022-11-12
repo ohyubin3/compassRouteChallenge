@@ -14,6 +14,9 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: moment().format("MM-DD-YYYY HH:MM:SS"),
+      get: (date) => {
+        return moment(date).format("MM-DD-YYYY HH:MM:SS");
+      },
     },
     username: {
       type: String,
